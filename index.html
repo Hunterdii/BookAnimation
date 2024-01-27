@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<title>Turning Pages with CSS</title>
+</head>
+<body>
+<div class="imgLoader"></div>
+<div class="container">
+<h1 class="title">
+Turning pages<br>with css
+</h1>
+<div class="credit">
+* Images loaded randomly from Picsum.photos
+</div>
+<div class="book">
+<div class="gap"></div>
+<div class="pages">
+<div class="page"></div>
+<div class="page"></div>
+<div class="page"></div>
+<div class="page"></div>
+<div class="page"></div>
+<div class="page"></div>
+</div>
+<div class="flips">
+<div class="flip flip1">
+<div class="flip flip2">
+<div class="flip flip3">
+<div class="flip flip4">
+<div class="flip flip5">
+<div class="flip flip6">
+<div class="flip flip7"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<script>
+    const pages = document.querySelectorAll('.page');
+    const flips = document.querySelectorAll('.flip');
+    
+    let currentPage = 0;
+    
+    function turnPage(pageIndex) {
+        if (pageIndex >= 0 && pageIndex < pages.length) {
+            pages[currentPage].classList.remove('active');
+            pages[pageIndex].classList.add('active');
+            currentPage = pageIndex;
+        }
+    }
+    
+    // Add click event listeners to each flip
+    flips.forEach((flip, index) => {
+        flip.addEventListener('click', () => {
+            turnPage(index);
+        });
+    });
+    
+    // Function to turn to the next page
+    function nextPage() {
+        const nextPageIndex = (currentPage + 1) % pages.length;
+        turnPage(nextPageIndex);
+    }
+    
+    // Function to turn to the previous page
+    function prevPage() {
+        const prevPageIndex = (currentPage - 1 + pages.length) % pages.length;
+        turnPage(prevPageIndex);
+    }
+    
+    // Add keyboard event listener for arrow keys
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowRight') {
+            nextPage();
+        } else if (event.key === 'ArrowLeft') {
+            prevPage();
+        }
+    });
+    
+    // Initialize by turning to the first page
+    turnPage(currentPage);
+    </script>
+    
+
+</body>
+</html>
